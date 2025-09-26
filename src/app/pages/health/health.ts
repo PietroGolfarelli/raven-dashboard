@@ -8,7 +8,7 @@ import { HealthService } from '../../services/health.service';
 })
 export class HealthComponent {
   result = 'pending…';
-  backendUrl = (window as any)?.__env?.BACKEND_URL || 'not-set';
+  backendUrl = (window as any)?.__env?.BACKEND_URL;
 
   constructor(private health: HealthService) { }
 
