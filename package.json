@@ -2,11 +2,10 @@
   "name": "raven-dashboard",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
+    "prestart": "dotenv -e .env.development -- bash -lc \"cp src/assets/env.template.js src/assets/env.js && npx replace-in-file '\\$BACKEND_URL' '${BACKEND_URL:-}' src/assets/env.js\"",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "prebuild": "dotenv -e .env.production -- bash -lc \"cp src/assets/env.template.js src/assets/env.js && npx replace-in-file '\\$BACKEND_URL' '${BACKEND_URL:-}' src/assets/env.js\""
   },
   "prettier": {
     "printWidth": 100,
@@ -37,12 +36,14 @@
     "@angular/cli": "^20.3.3",
     "@angular/compiler-cli": "^20.3.0",
     "@types/jasmine": "~5.1.0",
+    "dotenv-cli": "^10.0.0",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "replace-in-file": "^8.3.0",
     "typescript": "~5.9.2"
   }
 }
